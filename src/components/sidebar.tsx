@@ -1,5 +1,7 @@
+'use client'
+import { cn } from '@udecode/cn';
 import { ComponentType } from 'react';
-import { sidebarStructure } from '../sidebarStructure'; // adjust path as needed
+import { sidebarStructure } from '../sidebarStructure';
 
 interface SidebarItem {
   title: string;
@@ -9,22 +11,60 @@ interface SidebarItem {
   type: 'collection' | 'space' | 'page';
 }
 
+function CollectionHeader({ title }: { title: string }) {
+  return (
+    <div className="py-[6px] px-5 text-black">
+      <span className="font-bold uppercase text-xs">
+        {title}
+      </span>
+    </div>
+  );
+}
+
 function SidebarItemComponent({ item, depth = 0 }: { item: SidebarItem; depth?: number }) {
   const Icon = item.icon;
 
+  if (item.type === 'collection') {
+    return (
+      <li className="flex flex-col">
+        <CollectionHeader title={item.title} />
+        {item.children && (
+          <ul className="flex flex-col gap-y-0.5">
+            {item.children.map((child) => (
+              <SidebarItemComponent
+                key={child.slug}
+                item={child}
+                depth={depth + 1}
+              />
+            ))}
+          </ul>
+        )}
+      </li>
+    );
+  }
+
   return (
     <li className="flex flex-col">
-      <div className={`flex items-center gap-2 pl-${depth * 4}`}>
+      <div className={cn(
+        "hover:bg-[#eaeaee] hover:text-[#33353b] transition-colors cursor-pointer py-[6px] flex items-center gap-2 pl-5 pr-[6px] text-sm",
+        depth > 1 ? [
+          "before:border-l before:border-dark/3 dark:before:border-light/2",
+          "before:absolute before:left-[-1px] before:top-0 before:h-full relative",
+          "rounded-r-md"
+        ] : "rounded-md"
+      )}>
         {item.type === 'space' && Icon && (
           <Icon />
         )}
-        <span className={item.type === 'collection' ? 'font-bold uppercase' : ''}>
+        <span>
           {item.title}
         </span>
       </div>
-
       {item.children && (
-        <ul className="flex flex-col">
+        <ul className={cn(
+          "flex flex-col gap-y-0.5",
+          depth > 0 && "ms-5 my-2 border-l border-dark/3 dark:border-light/2"
+        )}>
           {item.children.map((child) => (
             <SidebarItemComponent
               key={child.slug}
@@ -40,9 +80,9 @@ function SidebarItemComponent({ item, depth = 0 }: { item: SidebarItem; depth?: 
 
 export function Sidebar() {
   return (
-    <aside className="w-64 h-screen bg-gray-50 overflow-y-auto">
+    <aside className="w-72 h-screen bg-gray-50 overflow-y-auto text-[#56585e]">
       <nav>
-        <ul className="flex flex-col gap-1 p-4">
+        <ul className="flex flex-col gap-y-0.5">
           {sidebarStructure.collections.map((collection) => (
             <SidebarItemComponent
               key={collection.slug}
@@ -54,3 +94,5 @@ export function Sidebar() {
     </aside>
   );
 }
+
+export default Sidebar;

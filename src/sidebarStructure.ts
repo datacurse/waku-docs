@@ -13,93 +13,67 @@ interface SidebarItem {
 export const sidebarStructure = {
   collections: [
     {
-      title: "GETTING STARTED",
+      title: "FUNDAMENTALS",
       type: 'collection',
-      slug: 'getting-started',
+      slug: 'fundamentals',
       children: [
         {
-          title: "Welcome",
+          title: "Introduction",
           type: 'page',
-          slug: 'welcome'
+          slug: 'introduction'
         },
         {
-          title: "Quickstart",
+          title: "Getting Started",
           type: 'page',
-          slug: 'quickstart'
+          slug: 'getting-started'
         },
         {
-          title: "Importing content",
-          type: 'page',
-          slug: 'importing-content'
-        },
-        {
-          title: "GitHub & GitLab Sync",
+          title: "Core Concepts",
           type: 'space',
           icon: PiHandWavingLight,
-          slug: 'github-gitlab-sync',
+          slug: 'core-concepts',
           isExpanded: true,
           children: [
             {
-              title: "Enabling GitHub Sync",
+              title: "Server Components",
               type: 'page',
-              slug: 'enabling-github-sync'
+              slug: 'server-components'
             },
             {
-              title: "Enabling GitLab Sync",
+              title: "Client Components",
               type: 'page',
-              slug: 'enabling-gitlab-sync'
+              slug: 'client-components'
             },
             {
-              title: "Content configuration",
+              title: "Shared Components",
               type: 'page',
-              slug: 'content-configuration'
+              slug: 'shared-components'
             },
             {
-              title: "GitHub pull request preview",
+              title: "Weaving Patterns",
               type: 'page',
-              slug: 'github-pull-request-preview'
-            },
-            {
-              title: "Commit messages & Autolink",
-              type: 'page',
-              slug: 'commit-messages-autolink'
-            },
-            {
-              title: "Monorepos",
-              type: 'page',
-              slug: 'monorepos'
-            },
-            {
-              title: "Troubleshooting",
-              type: 'page',
-              slug: 'troubleshooting'
+              slug: 'weaving-patterns'
             }
           ]
         }
       ]
     },
     {
-      title: "CREATING CONTENT",
+      title: "FEATURES",
       type: 'collection',
-      slug: 'creating-content',
+      slug: 'features',
       children: [
         {
-          title: "Formatting your content",
+          title: "Routing & Navigation",
           type: 'space',
           icon: PiHandWavingLight,
-          slug: 'formatting-your-content'
-        },
-        {
-          title: "Content structure",
-          type: 'space',
-          icon: PiHandWavingLight,
-          slug: 'content-structure',
+          slug: 'routing-navigation',
           isExpanded: true,
           children: [
             {
-              title: "Spaces",
+              title: "File-based Routing",
               type: 'page',
-              slug: 'spaces'
+              slug: 'file-based-routing'
             },
             {
               title: "Pages",
@@ -107,156 +81,38 @@ export const sidebarStructure = {
               slug: 'pages'
             },
             {
-              title: "Collections",
+              title: "Layouts",
               type: 'page',
-              slug: 'collections'
+              slug: 'layouts'
+            },
+            {
+              title: "Navigation",
+              type: 'page',
+              slug: 'navigation'
             }
           ]
         },
         {
-          title: "Blocks",
-          type: 'space',
-          icon: PiHandWavingLight,
-          slug: 'blocks',
-          isExpanded: true,
-          children: [
-            {
-              title: "Paragraphs",
-              type: 'page',
-              slug: 'paragraphs'
-            },
-            {
-              title: "Headings",
-              type: 'page',
-              slug: 'headings'
-            },
-            {
-              title: "Unordered lists",
-              type: 'page',
-              slug: 'unordered-lists'
-            }
-          ]
+          title: "Data & State",
+          type: 'page',
+          slug: 'data-state'
+        },
+        {
+          title: "Styling",
+          type: 'page',
+          slug: 'styling'
+        },
+        {
+          title: "Static Assets",
+          type: 'page',
+          slug: 'static-assets'
+        },
+        {
+          title: "Environment Variables",
+          type: 'page',
+          slug: 'environment-variables'
         }
       ]
-    },
-    {
-      title: "PLATFORM",
-      type: 'collection',
-      slug: 'platform',
-      children: [
-        {
-          title: "Introduction",
-          type: 'space',
-          icon: PiHandWavingLight,
-          slug: 'introduction',
-          isExpanded: true,
-          children: [
-            {
-              title: "Change Password",
-              type: 'page',
-              slug: 'change-password'
-            },
-            {
-              title: "Forgot Password",
-              type: 'page',
-              slug: 'forgot-password'
-            },
-            {
-              title: "Getting Started Checklist",
-              type: 'page',
-              slug: 'getting-started-checklist'
-            },
-            {
-              title: "Platform Overview",
-              type: 'page',
-              slug: 'platform-overview'
-            },
-            {
-              title: "Workspaces & Members",
-              type: 'page',
-              slug: 'workspaces-and-members'
-            },
-            {
-              title: "Integrations",
-              type: 'space',
-              icon: PiHandWavingLight,
-              slug: 'integrations',
-              isExpanded: true,
-              children: [
-                {
-                  title: "Stripe",
-                  type: 'page',
-                  slug: 'stripe'
-                },
-                {
-                  title: "PayPal",
-                  type: 'page',
-                  slug: 'paypal'
-                },
-                {
-                  title: "Cloudinary",
-                  type: 'page',
-                  slug: 'cloudinary'
-                },
-                {
-                  title: "Shopify",
-                  type: 'page',
-                  slug: 'shopify'
-                },
-                {
-                  title: "Facebook Business",
-                  type: 'page',
-                  slug: 'facebook-business'
-                },
-                {
-                  title: "Calendly",
-                  type: 'page',
-                  slug: 'calendly'
-                },
-                {
-                  title: "Slack",
-                  type: 'page',
-                  slug: 'slack'
-                },
-                {
-                  title: "Google Sheets",
-                  type: 'page',
-                  slug: 'google-sheets'
-                },
-                {
-                  title: "Data Store",
-                  type: 'page',
-                  slug: 'data-store'
-                },
-                {
-                  title: "Twilio",
-                  type: 'page',
-                  slug: 'twilio'
-                },
-                {
-                  title: "Signalwire",
-                  type: 'page',
-                  slug: 'signalwire'
-                },
-                {
-                  title: "Email (SMTP / Gmail)",
-                  type: 'page',
-                  slug: 'email-smtp-gmail'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          title: "Website Chat",
-          type: 'page',
-          slug: 'website-chat'
-        },
-        {
-          title: "WhatsApp Cloud",
-          type: 'page',
-          slug: 'whatsapp-cloud'
-        }
-      ]
-    }] as SidebarItem[]
+    }
+  ] as SidebarItem[]
 };

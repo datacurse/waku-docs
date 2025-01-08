@@ -1,6 +1,8 @@
 'use client'
+
 import { cn } from '@udecode/cn';
 import { ComponentType } from 'react';
+import { Link } from 'waku';
 import { sidebarStructure } from '../sidebarStructure';
 
 interface SidebarItem {
@@ -21,8 +23,17 @@ function CollectionHeader({ title }: { title: string }) {
   );
 }
 
-function SidebarItemComponent({ item, depth = 0 }: { item: SidebarItem; depth?: number }) {
+function SidebarItemComponent({
+  item,
+  depth = 0,
+  parentPath = ''
+}: {
+  item: SidebarItem;
+  depth?: number;
+  parentPath?: string;
+}) {
   const Icon = item.icon;
+  const currentPath = parentPath ? `${parentPath}/${item.slug}` : item.slug;
 
   if (item.type === 'collection') {
     return (
@@ -35,6 +46,7 @@ function SidebarItemComponent({ item, depth = 0 }: { item: SidebarItem; depth?: 
                 key={child.slug}
                 item={child}
                 depth={depth + 1}
+                parentPath={currentPath}
               />
             ))}
           </ul>
@@ -45,21 +57,24 @@ function SidebarItemComponent({ item, depth = 0 }: { item: SidebarItem; depth?: 
 
   return (
     <li className="flex flex-col">
-      <div className={cn(
-        "hover:bg-[#eaeaee] hover:text-[#33353b] transition-colors cursor-pointer py-[6px] flex items-center gap-2 pl-5 pr-[6px] text-sm",
-        depth > 1 ? [
-          "before:border-l before:border-dark/3 dark:before:border-light/2",
-          "before:absolute before:left-[-1px] before:top-0 before:h-full relative",
-          "rounded-r-md"
-        ] : "rounded-md"
-      )}>
+      <Link
+        to={`/${currentPath}`}
+        className={cn(
+          "hover:bg-[#f6f6f6] hover:text-[#33353b] transition-colors cursor-pointer py-[6px] flex items-center gap-2 pl-5 pr-[6px] text-sm",
+          depth > 1 ? [
+            "before:border-l before:border-dark/3 dark:before:border-light/2",
+            "before:absolute before:left-[-1px] before:top-0 before:h-full relative",
+            "rounded-r-md"
+          ] : "rounded-md"
+        )}
+      >
         {item.type === 'space' && Icon && (
           <Icon />
         )}
         <span>
           {item.title}
         </span>
-      </div>
+      </Link>
       {item.children && (
         <ul className={cn(
           "flex flex-col gap-y-0.5",
@@ -70,6 +85,7 @@ function SidebarItemComponent({ item, depth = 0 }: { item: SidebarItem; depth?: 
               key={child.slug}
               item={child}
               depth={depth + 1}
+              parentPath={currentPath}
             />
           ))}
         </ul>
@@ -80,7 +96,7 @@ function SidebarItemComponent({ item, depth = 0 }: { item: SidebarItem; depth?: 
 
 export function Sidebar() {
   return (
-    <aside className="w-72 h-screen bg-gray-50 overflow-y-auto text-[#56585e]">
+    <aside className="w-72 basis-72 flex-shrink-0 h-screen overflow-y-auto text-[#56585e]">
       <nav>
         <ul className="flex flex-col gap-y-0.5">
           {sidebarStructure.collections.map((collection) => (

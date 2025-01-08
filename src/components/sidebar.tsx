@@ -1,9 +1,10 @@
 'use client';
 
 import { cn } from '@udecode/cn';
-import { ComponentType } from 'react';
+import { ComponentType, useEffect, useState, useRef } from 'react';
 import { Link, useRouter_UNSTABLE as useRouter } from 'waku';
 import { sidebarStructure } from '../sidebarStructure';
+import { FaChevronRight } from "react-icons/fa6";
 
 interface SidebarItem {
   title: string;
@@ -55,16 +56,53 @@ function SpaceItem({
   parentPath?: string;
 }) {
   const router = useRouter();
-  const Icon = item.icon;
   const currentPath = parentPath ? `${parentPath}/${item.slug}` : item.slug;
+  const contentRef = useRef<HTMLUListElement>(null);
+  const [contentHeight, setContentHeight] = useState<number>(0);
+
+  // Check if current path or any child path is active
   const isActive = router.path === `/${currentPath}`;
+  const isChildActive = item.children?.some(child => {
+    const childPath = currentPath ? `${currentPath}/${child.slug}` : child.slug;
+    return router.path === `/${childPath}`;
+  });
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const Icon = item.icon;
+
+  // Update height when content changes
+  useEffect(() => {
+    if (contentRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          setContentHeight(entry.contentRect.height);
+        }
+      });
+
+      resizeObserver.observe(contentRef.current);
+      return () => resizeObserver.disconnect();
+    }
+  }, []);
+
+  // Update isOpen when path becomes active
+  useEffect(() => {
+    if (isActive || isChildActive) {
+      setIsOpen(true);
+    }
+  }, [isActive, isChildActive]);
+
+  const toggleCollapse = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
 
   return (
     <li className="flex flex-col">
       <Link
         to={`/${currentPath}`}
         className={cn(
-          "transition-colors cursor-pointer py-[6px] flex items-center gap-2 pl-5 pr-[6px] text-sm",
+          "transition-colors cursor-pointer py-[6px] flex items-center gap-2 pl-5 pr-3 text-sm",
           isActive
             ? "text-text-accent font-semibold hover:bg-surface-accent"
             : "hover:bg-surface hover:text-text text-text-muted",
@@ -76,25 +114,47 @@ function SpaceItem({
             : "rounded-md"
         )}
       >
-        {Icon && <Icon />}
-        <span>{item.title}</span>
+        <div
+          className="flex items-center justify-between w-full cursor-pointer"
+          onClick={item.children && item.children.length > 0 ? toggleCollapse : undefined}
+        >
+          <div className="flex items-center gap-2">
+            {Icon && <Icon />}
+            <span>{item.title}</span>
+          </div>
+          {item.children && item.children.length > 0 && (
+            <FaChevronRight
+              className={cn(
+                "h-4 w-4 transition-transform duration-300 ease-in-out",
+                isOpen && "rotate-90"
+              )}
+            />
+          )}
+        </div>
       </Link>
       {item.children && (
-        <ul className="flex flex-col gap-y-0.5 ms-5 my-2">
-          {item.children.map((child) => (
-            <SidebarItemComponent
-              key={child.slug}
-              item={child}
-              depth={depth + 1}
-              parentPath={currentPath}
-            />
-          ))}
-        </ul>
+        <div
+          className="overflow-hidden transition-all duration-300 ease-in-out"
+          style={{ maxHeight: isOpen ? `${contentHeight}px` : '0px' }}
+        >
+          <ul
+            ref={contentRef}
+            className="flex flex-col gap-y-0.5 ms-5 my-2"
+          >
+            {item.children.map((child) => (
+              <SidebarItemComponent
+                key={child.slug}
+                item={child}
+                depth={depth + 1}
+                parentPath={currentPath}
+              />
+            ))}
+          </ul>
+        </div>
       )}
     </li>
   );
 }
-
 function PageItem({
   item,
   depth = 0,

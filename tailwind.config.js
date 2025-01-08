@@ -22,6 +22,10 @@ export default {
         border: {
           DEFAULT: '#e5e7eb',
           accent: '#359aba'
+        },
+        icon: {
+          DEFAULT: '#a5a5a5',
+          accent: '#359aba',
         }
       }
     }

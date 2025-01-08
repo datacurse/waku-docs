@@ -1,5 +1,9 @@
 import { ComponentType } from 'react';
+
 import { PiHandWavingLight } from 'react-icons/pi';
+import { FaBolt, } from "react-icons/fa6";
+import { LuArrowUpToLine } from "react-icons/lu";
+import { IoGitPullRequestOutline } from "react-icons/io5";
 
 interface SidebarItem {
   title: string;
@@ -24,11 +28,19 @@ export const sidebarStructure = {
         },
         {
           title: 'Quickstart',
+          icon: FaBolt,
           type: 'page',
           slug: 'quickstart'
         },
         {
+          title: 'Importing content',
+          icon: LuArrowUpToLine,
+          type: 'page',
+          slug: 'importing-content'
+        },
+        {
           title: 'GitHub & GitLab Sunc',
+          icon: IoGitPullRequestOutline,
           type: 'space',
           slug: 'git-sync',
           children: [

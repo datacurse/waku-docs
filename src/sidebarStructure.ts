@@ -1,56 +1,54 @@
 import { ComponentType } from 'react';
-import { PiHandWavingLight } from "react-icons/pi";
+import { PiHandWavingLight } from 'react-icons/pi';
 
 interface SidebarItem {
   title: string;
   icon?: ComponentType;
   slug: string;
   children?: SidebarItem[];
-  isExpanded?: boolean;
   type: 'collection' | 'space' | 'page';
 }
 
 export const sidebarStructure = {
   collections: [
     {
-      title: "FUNDAMENTALS",
+      title: 'GETTING STARTED',
       type: 'collection',
-      slug: 'fundamentals',
+      slug: 'getting-started',
       children: [
         {
-          title: "Introduction",
-          type: 'page',
-          slug: 'introduction'
-        },
-        {
-          title: "Getting Started",
-          type: 'page',
-          slug: 'getting-started'
-        },
-        {
-          title: "Core Concepts",
-          type: 'space',
+          title: 'Welcome',
           icon: PiHandWavingLight,
-          slug: 'core-concepts',
-          isExpanded: true,
+          type: 'page',
+          slug: 'welcome'
+        },
+        {
+          title: 'Quickstart',
+          type: 'page',
+          slug: 'quickstart'
+        },
+        {
+          title: 'GitHub & GitLab Sunc',
+          type: 'space',
+          slug: 'git-sync',
           children: [
             {
-              title: "Server Components",
+              title: 'Server Components',
               type: 'page',
               slug: 'server-components'
             },
             {
-              title: "Client Components",
+              title: 'Client Components',
               type: 'page',
               slug: 'client-components'
             },
             {
-              title: "Shared Components",
+              title: 'Shared Components',
               type: 'page',
               slug: 'shared-components'
             },
             {
-              title: "Weaving Patterns",
+              title: 'Weaving Patterns',
               type: 'page',
               slug: 'weaving-patterns'
             }
@@ -59,56 +57,55 @@ export const sidebarStructure = {
       ]
     },
     {
-      title: "FEATURES",
+      title: 'FEATURES',
       type: 'collection',
       slug: 'features',
       children: [
         {
-          title: "Routing & Navigation",
+          title: 'Routing & Navigation',
           type: 'space',
           icon: PiHandWavingLight,
           slug: 'routing-navigation',
-          isExpanded: true,
           children: [
             {
-              title: "File-based Routing",
+              title: 'File-based Routing',
               type: 'page',
               slug: 'file-based-routing'
             },
             {
-              title: "Pages",
+              title: 'Pages',
               type: 'page',
               slug: 'pages'
             },
             {
-              title: "Layouts",
+              title: 'Layouts',
               type: 'page',
               slug: 'layouts'
             },
             {
-              title: "Navigation",
+              title: 'Navigation',
               type: 'page',
               slug: 'navigation'
             }
           ]
         },
         {
-          title: "Data & State",
+          title: 'Data & State',
           type: 'page',
           slug: 'data-state'
         },
         {
-          title: "Styling",
+          title: 'Styling',
           type: 'page',
           slug: 'styling'
         },
         {
-          title: "Static Assets",
+          title: 'Static Assets',
           type: 'page',
           slug: 'static-assets'
         },
         {
-          title: "Environment Variables",
+          title: 'Environment Variables',
           type: 'page',
           slug: 'environment-variables'
         }

@@ -1,14 +1,21 @@
 'use client';
 
 import { cn } from '@udecode/cn';
-import { ComponentType, useEffect, useState, useRef } from 'react';
+import { ComponentType, useEffect, useState } from 'react';
 import { Link, useRouter_UNSTABLE as useRouter } from 'waku';
-import { sidebarStructure } from '../sidebarStructure';
 import { FaChevronRight } from "react-icons/fa6";
+import { sidebarStructure } from '../sidebarStructure';
+
+interface IconProps {
+  className?: string;
+}
+
+// Properly type the icon component
+type IconComponent = ComponentType<IconProps>;
 
 interface SidebarItem {
   title: string;
-  icon?: ComponentType;
+  icon?: IconComponent;
   slug: string;
   children?: SidebarItem[];
   type: 'collection' | 'space' | 'page';
@@ -24,10 +31,12 @@ function CollectionItem({
   parentPath?: string;
 }) {
   const currentPath = parentPath ? `${parentPath}/${item.slug}` : item.slug;
+  const Icon = item.icon;
 
   return (
     <li className="flex flex-col">
-      <div className="py-[6px] px-5 text-text">
+      <div className="flex items-center gap-3 px-5 pt-6 pb-1.5 text-xs tracking-wide font-semibold uppercase z-[1] sticky -top-4">
+        {Icon && <Icon className={cn("h-4 w-4")} aria-hidden="true" />}
         <span className="font-bold uppercase text-xs">{item.title}</span>
       </div>
       {item.children && (
@@ -94,7 +103,7 @@ function SpaceItem({
           to={`/${currentPath}`}
           className="flex items-center gap-2 flex-1 cursor-pointer"
         >
-          {Icon && <Icon />}
+          {Icon && <Icon className="h-4 w-4" />}
           <span>{item.title}</span>
         </Link>
         {item.children && item.children.length > 0 && (
@@ -138,6 +147,7 @@ function SpaceItem({
     </li>
   );
 }
+
 function PageItem({
   item,
   depth = 0,
@@ -150,6 +160,7 @@ function PageItem({
   const router = useRouter();
   const currentPath = parentPath ? `${parentPath}/${item.slug}` : item.slug;
   const isActive = router.path === `/${currentPath}`;
+  const Icon = item.icon;
 
   return (
     <li className="flex flex-col">
@@ -168,6 +179,7 @@ function PageItem({
             : "rounded-md"
         )}
       >
+        {Icon && <Icon className="h-4 w-4" />}
         <span>{item.title}</span>
       </Link>
     </li>

@@ -36,7 +36,7 @@ function CollectionItem({
   return (
     <li className="flex flex-col">
       <div className="flex items-center gap-3 px-5 pt-6 pb-1.5 text-xs tracking-wide font-semibold uppercase z-[1] sticky -top-4">
-        {Icon && <Icon className="h-4 w-4 text-icon" aria-hidden="true" />}
+        {Icon && <Icon className="h-5 w-5 text-icon" aria-hidden="true" />}
         <span className="font-bold uppercase text-xs">{item.title}</span>
       </div>
       {item.children && (
@@ -103,7 +103,7 @@ function SpaceItem({
           to={`/${currentPath}`}
           className="flex items-center gap-2 flex-1 cursor-pointer"
         >
-          {Icon && <Icon className="h-4 w-4 text-icon" />}
+          {Icon && <Icon className="h-5 w-5 text-icon" />}
           <span>{item.title}</span>
         </Link>
         {item.children && item.children.length > 0 && (
@@ -179,7 +179,7 @@ function PageItem({
             : "rounded-md"
         )}
       >
-        {Icon && <Icon className="h-4 w-4 text-icon" />}
+        {Icon && <Icon className="h-5 w-5 text-icon" />}
         <span>{item.title}</span>
       </Link>
     </li>

@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
 import { cn } from '@udecode/cn';
 import { ComponentType } from 'react';
-import { Link } from 'waku';
+import { Link, useRouter_UNSTABLE as useRouter } from 'waku';
 import { sidebarStructure } from '../sidebarStructure';
 
 interface SidebarItem {
@@ -32,8 +32,10 @@ function SidebarItemComponent({
   depth?: number;
   parentPath?: string;
 }) {
+  const router = useRouter();
   const Icon = item.icon;
   const currentPath = parentPath ? `${parentPath}/${item.slug}` : item.slug;
+  const isActive = router.path === `/${currentPath}`;
 
   if (item.type === 'collection') {
     return (
@@ -60,9 +62,14 @@ function SidebarItemComponent({
       <Link
         to={`/${currentPath}`}
         className={cn(
-          "hover:bg-[#f6f6f6] hover:text-[#33353b] transition-colors cursor-pointer py-[6px] flex items-center gap-2 pl-5 pr-[6px] text-sm",
+          "transition-colors cursor-pointer py-[6px] flex items-center gap-2 pl-5 pr-[6px] text-sm",
+          isActive ? [
+            "text-blue-600 font-semibold hover:bg-blue-50",
+          ] : [
+            "hover:bg-[#f6f6f6] hover:text-[#33353b] text-[#56585e]",
+          ],
           depth > 1 ? [
-            "before:border-l before:border-dark/3 dark:before:border-light/2",
+            "before:border-l before:border-dark/3",
             "before:absolute before:left-[-1px] before:top-0 before:h-full relative",
             "rounded-r-md"
           ] : "rounded-md"
@@ -78,7 +85,7 @@ function SidebarItemComponent({
       {item.children && (
         <ul className={cn(
           "flex flex-col gap-y-0.5",
-          depth > 0 && "ms-5 my-2 border-l border-dark/3 dark:border-light/2"
+          depth > 0 && "ms-5 my-2 border-l border-dark/3"
         )}>
           {item.children.map((child) => (
             <SidebarItemComponent
@@ -96,7 +103,7 @@ function SidebarItemComponent({
 
 export function Sidebar() {
   return (
-    <aside className="w-72 basis-72 flex-shrink-0 h-screen overflow-y-auto text-[#56585e]">
+    <aside className="w-72 basis-72 flex-shrink-0 h-screen overflow-y-auto">
       <nav>
         <ul className="flex flex-col gap-y-0.5">
           {sidebarStructure.collections.map((collection) => (

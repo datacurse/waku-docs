@@ -31,6 +31,7 @@ export default async function HomePage({ path }: { path: string }) {
   const pageTitle = sidebarItem?.title;
 
   return (
+    // TODO: move padding to parent component
     <div className='py-8 px-24'>
       <title>{pageTitle}</title>
       <h1 className="text-4xl font-bold tracking-tight">{pageTitle}</h1>

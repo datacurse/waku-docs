@@ -91,18 +91,11 @@ function SpaceItem({
     }
   }, [isActive, isChildActive]);
 
-  const toggleCollapse = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsOpen(!isOpen);
-  };
-
   return (
     <li className="flex flex-col">
-      <Link
-        to={`/${currentPath}`}
+      <div
         className={cn(
-          "transition-colors cursor-pointer py-[6px] flex items-center gap-2 pl-5 pr-3 text-sm",
+          "transition-colors py-[6px] flex items-center gap-2 pl-5 pr-3 text-sm",
           isActive
             ? "text-text-accent font-semibold hover:bg-surface-accent"
             : "hover:bg-surface hover:text-text text-text-muted",
@@ -114,24 +107,30 @@ function SpaceItem({
             : "rounded-md"
         )}
       >
-        <div
-          className="flex items-center justify-between w-full cursor-pointer"
-          onClick={item.children && item.children.length > 0 ? toggleCollapse : undefined}
+        <Link
+          to={`/${currentPath}`}
+          className="flex items-center gap-2 flex-1 cursor-pointer"
         >
-          <div className="flex items-center gap-2">
-            {Icon && <Icon />}
-            <span>{item.title}</span>
-          </div>
-          {item.children && item.children.length > 0 && (
+          {Icon && <Icon />}
+          <span>{item.title}</span>
+        </Link>
+        {item.children && item.children.length > 0 && (
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className={cn('h-5 w-5 flex items-center justify-center rounded-full',
+              isActive
+                ? 'hover:bg-surface-elevated-accent'
+                : 'hover:bg-surface-elevated')}
+          >
             <FaChevronRight
               className={cn(
-                "h-4 w-4 transition-transform duration-300 ease-in-out",
+                "h-3 w-3 transition-transform duration-300 ease-in-out",
                 isOpen && "rotate-90"
               )}
             />
-          )}
-        </div>
-      </Link>
+          </button>
+        )}
+      </div>
       {item.children && (
         <div
           className="overflow-hidden transition-all duration-300 ease-in-out"
@@ -155,6 +154,7 @@ function SpaceItem({
     </li>
   );
 }
+
 function PageItem({
   item,
   depth = 0,

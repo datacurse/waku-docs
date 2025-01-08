@@ -15,7 +15,9 @@ export default {
         },
         surface: {
           DEFAULT: '#f6f6f6',
-          accent: '#e6f3f7'
+          accent: '#e6f3f7',
+          elevated: '#e5e5e5',
+          'elevated-accent': '#cae5ed'
         },
         border: {
           DEFAULT: '#e5e7eb',

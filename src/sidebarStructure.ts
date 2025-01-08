@@ -33,44 +33,77 @@ export const sidebarStructure = {
           slug: 'git-sync',
           children: [
             {
-              title: 'Server Components',
+              title: 'Enabling GitHub Sync',
               type: 'page',
-              slug: 'server-components'
+              slug: 'enabling-githug-sync'
             },
             {
-              title: 'Client Components',
+              title: 'Enabling GitLab Sync',
               type: 'page',
-              slug: 'client-components'
+              slug: 'enabling-gitlab-sync'
             },
             {
-              title: 'Shared Components',
+              title: 'Content configuration',
               type: 'page',
-              slug: 'shared-components'
+              slug: 'content-configuration'
             },
             {
-              title: 'Weaving Patterns',
+              title: 'GitHub pull request preview',
               type: 'page',
-              slug: 'weaving-patterns'
-            }
+              slug: 'github-pull-request-preview'
+            },
+            {
+              title: 'Commit messages & Autolink',
+              type: 'page',
+              slug: 'commits'
+            },
+            {
+              title: 'Monorepos',
+              type: 'page',
+              slug: 'monorepos'
+            },
+            {
+              title: 'Troubleshooting',
+              type: 'page',
+              slug: 'troubleshooting'
+            },
           ]
         }
       ]
     },
     {
-      title: 'FEATURES',
+      title: 'CREATING CONTENT',
       type: 'collection',
-      slug: 'features',
+      slug: 'creating-content',
       children: [
         {
-          title: 'Routing & Navigation',
+          title: 'Formatting your content',
           type: 'space',
           icon: PiHandWavingLight,
-          slug: 'routing-navigation',
+          slug: 'formatting-your-content',
           children: [
             {
-              title: 'File-based Routing',
+              title: 'Inline content',
               type: 'page',
-              slug: 'file-based-routing'
+              slug: 'inline-content'
+            },
+            {
+              title: 'Markdown',
+              type: 'page',
+              slug: 'markdown'
+            },
+          ]
+        },
+        {
+          title: 'Content structure',
+          type: 'space',
+          icon: PiHandWavingLight,
+          slug: 'content-structure',
+          children: [
+            {
+              title: 'Spaces',
+              type: 'page',
+              slug: 'spaces'
             },
             {
               title: 'Pages',
@@ -78,36 +111,165 @@ export const sidebarStructure = {
               slug: 'pages'
             },
             {
-              title: 'Layouts',
+              title: 'Collections',
               type: 'page',
-              slug: 'layouts'
+              slug: 'collections'
             },
-            {
-              title: 'Navigation',
-              type: 'page',
-              slug: 'navigation'
-            }
           ]
         },
         {
-          title: 'Data & State',
-          type: 'page',
-          slug: 'data-state'
+          title: 'Blocks',
+          type: 'space',
+          icon: PiHandWavingLight,
+          slug: 'blocks',
+          children: [
+            {
+              title: 'Paragraphs',
+              type: 'page',
+              slug: 'paragraphs'
+            },
+            {
+              title: 'Headings',
+              type: 'page',
+              slug: 'headings'
+            },
+            {
+              title: 'Unordered lists',
+              type: 'page',
+              slug: 'unordered-lists'
+            },
+            {
+              title: 'Ordered lists',
+              type: 'page',
+              slug: 'ordered-lists'
+            },
+            {
+              title: 'Task lists',
+              type: 'page',
+              slug: 'task-lists'
+            },
+            {
+              title: 'Hints',
+              type: 'page',
+              slug: 'hints'
+            },
+            {
+              title: 'Quotes',
+              type: 'page',
+              slug: 'quotes'
+            },
+            {
+              title: 'Code blocks',
+              type: 'page',
+              slug: 'code-blocks'
+            },
+            {
+              title: 'Files',
+              type: 'page',
+              slug: 'files'
+            },
+            {
+              title: 'Images',
+              type: 'page',
+              slug: 'images'
+            },
+            {
+              title: 'Embedded URLs',
+              type: 'page',
+              slug: 'embedded-urls'
+            },
+            {
+              title: 'Tables',
+              type: 'page',
+              slug: 'tables'
+            },
+            {
+              title: 'Cards',
+              type: 'page',
+              slug: 'cards'
+            },
+            {
+              title: 'Tabs',
+              type: 'page',
+              slug: 'tabs'
+            },
+            {
+              title: 'Expandable',
+              type: 'page',
+              slug: 'expandable'
+            },
+            {
+              title: 'Stepper',
+              type: 'page',
+              slug: 'stepper'
+            },
+            {
+              title: 'Drawings',
+              type: 'page',
+              slug: 'drawings'
+            },
+            {
+              title: 'Math & TeX',
+              type: 'page',
+              slug: 'math-and-tex'
+            },
+            {
+              title: 'Page links',
+              type: 'page',
+              slug: 'page-links'
+            },
+          ]
         },
         {
-          title: 'Styling',
+          title: 'Reusable content',
           type: 'page',
-          slug: 'styling'
+          slug: 'reusable-content'
         },
         {
-          title: 'Static Assets',
+          title: 'Broken links',
           type: 'page',
-          slug: 'static-assets'
+          slug: 'broken-links'
         },
         {
-          title: 'Environment Variables',
+          title: 'Searching content',
+          type: 'space',
+          icon: PiHandWavingLight,
+          slug: 'searching-content',
+          children: [
+            {
+              title: 'Search & Quick find',
+              type: 'page',
+              slug: 'seach-and-quick-find'
+            },
+            {
+              title: 'GitBook AI',
+              type: 'page',
+              slug: 'gitbook-ai'
+            },
+          ]
+        },
+        {
+          title: 'OpenAPI',
+          type: 'space',
+          icon: PiHandWavingLight,
+          slug: 'openapi',
+          children: [
+            {
+              title: 'Support for CI/CD with API blocks',
+              type: 'page',
+              slug: 'support-for-ci-cd-with-api-blocks'
+            },
+          ]
+        },
+        {
+          title: 'Writing with GitBook AI',
           type: 'page',
-          slug: 'environment-variables'
+          slug: 'writing-with-gitbook-ai'
+        },
+        {
+          title: 'Version control',
+          type: 'page',
+          slug: 'version-control'
         }
       ]
     }

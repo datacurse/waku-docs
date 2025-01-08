@@ -57,8 +57,8 @@ function SpaceItem({
 }) {
   const router = useRouter();
   const currentPath = parentPath ? `${parentPath}/${item.slug}` : item.slug;
-  const contentRef = useRef<HTMLUListElement>(null);
-  const [contentHeight, setContentHeight] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const Icon = item.icon;
 
   // Check if current path or any child path is active
   const isActive = router.path === `/${currentPath}`;
@@ -66,23 +66,6 @@ function SpaceItem({
     const childPath = currentPath ? `${currentPath}/${child.slug}` : child.slug;
     return router.path === `/${childPath}`;
   });
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const Icon = item.icon;
-
-  // Update height when content changes
-  useEffect(() => {
-    if (contentRef.current) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          setContentHeight(entry.contentRect.height);
-        }
-      });
-
-      resizeObserver.observe(contentRef.current);
-      return () => resizeObserver.disconnect();
-    }
-  }, []);
 
   // Update isOpen when path becomes active
   useEffect(() => {
@@ -95,7 +78,7 @@ function SpaceItem({
     <li className="flex flex-col">
       <div
         className={cn(
-          "transition-colors py-[6px] flex items-center gap-2 pl-5 pr-3 text-sm",
+          "transition-colors py-[6px] flex items-center gap-2 pl-5 pr-[6px] text-sm",
           isActive
             ? "text-text-accent font-semibold hover:bg-surface-accent"
             : "hover:bg-surface hover:text-text text-text-muted",
@@ -133,28 +116,28 @@ function SpaceItem({
       </div>
       {item.children && (
         <div
-          className="overflow-hidden transition-all duration-300 ease-in-out"
-          style={{ maxHeight: isOpen ? `${contentHeight}px` : '0px' }}
+          className={cn(
+            "grid transition-all duration-300 ease-in-out",
+            isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          )}
         >
-          <ul
-            ref={contentRef}
-            className="flex flex-col gap-y-0.5 ms-5 my-2"
-          >
-            {item.children.map((child) => (
-              <SidebarItemComponent
-                key={child.slug}
-                item={child}
-                depth={depth + 1}
-                parentPath={currentPath}
-              />
-            ))}
-          </ul>
+          <div className="overflow-hidden">
+            <ul className="flex flex-col gap-y-0.5 ms-5 my-2">
+              {item.children.map((child) => (
+                <SidebarItemComponent
+                  key={child.slug}
+                  item={child}
+                  depth={depth + 1}
+                  parentPath={currentPath}
+                />
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </li>
   );
 }
-
 function PageItem({
   item,
   depth = 0,

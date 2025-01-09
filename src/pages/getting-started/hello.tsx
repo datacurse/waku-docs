@@ -1,6 +1,7 @@
+
 import { Link } from 'waku';
 
-import { Counter } from '../components/Counter';
+import { Counter } from '@/components/Counter';
 import Breadcrumbs from '@/components/content/Breadcrumbs';
 
 export default async function HomePage() {

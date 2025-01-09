@@ -17,7 +17,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <Header />
       {/* Add min-w-0 to the flex container to handle overflow properly */}
       <div className='flex flex-row min-w-0 sm:px-[4px] md:px-3 max-w-screen-2xl mx-auto page-full-width:max-w-full'>
-        <Sidebar />
         {/* Add min-w-0 to prevent content from pushing sidebar */}
         <main className="min-w-0 flex-1 max-w-3xl">
           {children}

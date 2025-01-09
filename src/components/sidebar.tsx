@@ -1,7 +1,6 @@
 'use client'
 
 import { sidebarStructure } from "../sidebarStructure";
-import { generateSlug } from "./generateSlug";
 import { useState, useEffect, JSX } from 'react';
 import { Link, useRouter_UNSTABLE as useRouter } from 'waku';
 import { cn } from '@udecode/cn';

@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { Sidebar } from '../components/Sidebar'
+import Breadcrumbs from '@/components/content/Breadcrumbs';
 
 type RootLayoutProps = { children: ReactNode };
 
@@ -15,10 +16,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <meta name="description" content={data.description} />
       <link rel="icon" type="image/png" href={data.icon} />
       <Header />
-      {/* Add min-w-0 to the flex container to handle overflow properly */}
       <div className='flex flex-row min-w-0 sm:px-[4px] md:px-3 max-w-screen-2xl mx-auto page-full-width:max-w-full'>
-        {/* Add min-w-0 to prevent content from pushing sidebar */}
-        <main className="min-w-0 flex-1 max-w-3xl">
+        <Sidebar />
+        <main className="min-w-0 flex-1 max-w-3xl py-8 px-24">
           {children}
         </main>
       </div>

@@ -1,5 +1,6 @@
 'use client'
 
+import type { SidebarItem } from "../sidebarStructure";
 import { sidebarStructure } from "../sidebarStructure";
 import { useState, useEffect, JSX } from 'react';
 import { Link, useRouter_UNSTABLE as useRouter } from 'waku';
@@ -13,18 +14,12 @@ export function Sidebar() {
       <nav>
         <ul className="flex flex-col gap-y-0.5">
           {sidebarStructure.map(item => (
-            <SidebarItem key={generateSlug(item.title)} item={item} />
+            <SidebarItemComponent key={item.slug} item={item} />
           ))}
         </ul>
       </nav>
     </aside>
   );
-}
-
-interface SidebarItemData {
-  title: string;
-  icon?: IconType;
-  children?: SidebarItemData[];
 }
 
 const CollectionHeader = ({ icon: Icon, title }: {
@@ -52,7 +47,11 @@ const ItemIcon = ({ icon: Icon, isActive }: {
   );
 };
 
-const ExpandButton = ({ isExpanded, onClick, isActive }: { isExpanded: boolean; onClick: (e: React.MouseEvent) => void; isActive: boolean }) => (
+const ExpandButton = ({ isExpanded, onClick, isActive }: {
+  isExpanded: boolean;
+  onClick: (e: React.MouseEvent) => void;
+  isActive: boolean
+}) => (
   <button
     type="button"
     onClick={onClick}
@@ -71,21 +70,19 @@ const ExpandButton = ({ isExpanded, onClick, isActive }: { isExpanded: boolean; 
   </button>
 );
 
-export function SidebarItem({ item, path = '', depth = 0 }: {
-  item: SidebarItemData;
+export function SidebarItemComponent({ item, path = '', depth = 0 }: {
+  item: SidebarItem;
   path?: string;
   depth?: number;
 }): JSX.Element {
   const router = useRouter();
   const [isExpanded, setIsExpanded] = useState(false);
-  const currentSlug = generateSlug(item.title);
-  const fullPath = path ? `${path}/${currentSlug}` : currentSlug;
+  const fullPath = path ? `${path}/${item.slug}` : item.slug;
   const isActive = router.path === `/${fullPath}`;
 
-  const isChildActive = (children?: SidebarItemData[]): boolean => {
+  const isChildActive = (children?: SidebarItem[]): boolean => {
     return children?.some(child => {
-      const childSlug = generateSlug(child.title);
-      const childPath = path ? `${path}/${currentSlug}/${childSlug}` : `${currentSlug}/${childSlug}`;
+      const childPath = path ? `${path}/${item.slug}/${child.slug}` : `${item.slug}/${child.slug}`;
       return router.path === `/${childPath}` || (child.children && isChildActive(child.children));
     }) ?? false;
   };
@@ -104,8 +101,8 @@ export function SidebarItem({ item, path = '', depth = 0 }: {
         {item.children && (
           <ul className="flex flex-col gap-y-0.5">
             {item.children.map(child => (
-              <SidebarItem
-                key={generateSlug(child.title)}
+              <SidebarItemComponent
+                key={child.slug}
                 item={child}
                 path={fullPath}
                 depth={depth + 1}
@@ -122,9 +119,7 @@ export function SidebarItem({ item, path = '', depth = 0 }: {
     "flex items-center gap-2 py-1.5 pl-5 pr-1.5 text-sm",
     "transition-colors",
     isActive ? "text-text-accent font-semibold hover:bg-surface-accent" : "text-text-muted hover:bg-surface hover:text-text",
-    // Simple rounded corners based on depth
     depth === 1 ? "rounded-md" : "rounded-r-md",
-    // Simple border for nested items
     depth > 1 && (isActive ? "border-l border-border-accent" : "border-l border-border")
   );
 
@@ -132,7 +127,6 @@ export function SidebarItem({ item, path = '', depth = 0 }: {
   if (item.children) {
     return (
       <li className="flex flex-col">
-
         <Link to={`/${fullPath}`} className={cn(baseItemClasses, "flex justify-between")}>
           <div className="flex items-center gap-2">
             <ItemIcon icon={item.icon} isActive={isActive} />
@@ -155,8 +149,8 @@ export function SidebarItem({ item, path = '', depth = 0 }: {
           <div className="overflow-hidden">
             <ul className="flex flex-col gap-y-0.5 ms-5 my-2">
               {item.children.map(child => (
-                <SidebarItem
-                  key={generateSlug(child.title)}
+                <SidebarItemComponent
+                  key={child.slug}
                   item={child}
                   path={fullPath}
                   depth={depth + 1}

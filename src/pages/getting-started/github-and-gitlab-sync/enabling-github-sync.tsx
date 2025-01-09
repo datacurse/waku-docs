@@ -1,11 +1,11 @@
 import Breadcrumbs from "@/components/content/Breadcrumbs";
+import Title from "@/components/content/Title";
 
 export default async function Page() {
   return (
     <div>
       <Breadcrumbs />
-      <title>{"hello"}</title>
-      <h1 className="text-4xl font-bold tracking-tight">{"header"}</h1>
+      <Title />
       <p>{"body"}</p>
     </div>
   );

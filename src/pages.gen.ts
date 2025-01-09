@@ -8,6 +8,7 @@ import type { getConfig as CatchAll_getConfig } from './pages/[...catchAll]';
 
 type Page =
 | ({path: '/about'} & GetConfigResponse<typeof About_getConfig>)
+| {path: '/creating-content/blocks'; render: 'dynamic'}
 | {path: '/getting-started/github-and-gitlab-sync/enabling-github-sync'; render: 'dynamic'}
 | ({path: '/getting-started/hello'} & GetConfigResponse<typeof GettingStartedHello_getConfig>)
 | ({path: '/getting-started'} & GetConfigResponse<typeof GettingStartedIndex_getConfig>)

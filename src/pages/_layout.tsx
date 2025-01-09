@@ -18,7 +18,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <Header />
       <div className='flex flex-row min-w-0 sm:px-[4px] md:px-3 max-w-screen-2xl mx-auto page-full-width:max-w-full'>
         <Sidebar />
-        <main className="min-w-0 flex-1 max-w-3xl py-8 px-24">
+        <main className="min-w-0 flex-1 max-w-[1654px] py-8 px-24">
           {children}
         </main>
       </div>

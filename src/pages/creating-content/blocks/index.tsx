@@ -12,15 +12,12 @@ import { stat } from 'fs/promises';
 import { fileURLToPath } from 'url';
 
 export default async function Page() {
-  // Get the last modified time using fs.stat
   const getLastModifiedDate = async () => {
     try {
-      // Get the current file's path automatically
       const currentFilePath = fileURLToPath(import.meta.url);
       const stats = await stat(currentFilePath);
       return stats.mtime.toISOString();
     } catch (error) {
-      // If there's an error reading the file stats, return current date
       return new Date().toISOString();
     }
   };

@@ -28,7 +28,7 @@ const CollectionHeader = ({ icon: Icon, title }: {
 }) => (
   <div className="flex items-center gap-3 px-5 pt-6 pb-1.5 sticky -top-4 z-[1]">
     {Icon && <Icon className="h-5 w-5 text-icon" />}
-    <span className="font-bold uppercase text-xs tracking-wide">{title}</span>
+    <span className="font-semibold uppercase text-xs tracking-wide">{title}</span>
   </div>
 );
 

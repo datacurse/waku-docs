@@ -6,7 +6,7 @@ export default {
       colors: {
         text: {
           DEFAULT: '#1d1d1d',
-          muted: '#56585e',
+          muted: '#555555',
           accent: '#359aba',
           'accent-muted': '#205c70',
         },
@@ -26,6 +26,10 @@ export default {
         icon: {
           DEFAULT: '#a5a5a5',
           accent: '#359aba',
+        },
+        code: {
+          bg: '#f2f2f2',
+          border: '#eaeaea'
         }
       }
     }

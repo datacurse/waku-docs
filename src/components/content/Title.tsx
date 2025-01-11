@@ -15,11 +15,11 @@ export default function Title() {
   const pageTitle = currentItem?.title || slugs[slugs.length - 1];
 
   return (
-    <h1 className="text-4xl font-bold flex items-center gap-4">
+    <div className="text-4xl font-bold flex items-center gap-4">
       {currentItem?.icon && (
         <currentItem.icon className="w-9 h-9 text-icon" />
       )}
       {pageTitle}
-    </h1>
+    </div>
   );
 }

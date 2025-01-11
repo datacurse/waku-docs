@@ -17,7 +17,7 @@ export const ImageWithCaption = ({ src, description, className = '' }: ImageWith
         />
       </div>
       {description && (
-        <div className="mt-2 text-center text-md text-text-muted">
+        <div className="mt-2 text-center text-sm text-text-muted">
           {description}
         </div>
       )}

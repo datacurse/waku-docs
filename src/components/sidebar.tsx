@@ -8,17 +8,23 @@ import { cn } from '@udecode/cn';
 import { FaChevronRight } from "react-icons/fa6";
 import { IconType } from 'react-icons';
 
+
 export function Sidebar() {
   return (
-    <aside className="w-72 basis-72 flex-shrink-0 h-screen overflow-y-auto">
-      <nav>
-        <ul className="flex flex-col gap-y-0.5">
-          {sidebarStructure.map(item => (
-            <SidebarItemComponent key={item.slug} item={item} />
-          ))}
-        </ul>
-      </nav>
-    </aside>
+    <div className="relative w-72 basis-72 flex-shrink-0 h-screen">
+      {/* Wrapper div with fixed padding to prevent layout shift */}
+      <div className="absolute inset-0 pr-4">
+        {/* Inner scrollable container with transition */}
+        <div className="h-full overflow-y-hidden hover:overflow-y-auto transition-all duration-300 ease-in-out scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-track">
+          {/* Content container with padding to account for scrollbar width */}
+          <div className="pr-2">
+            {sidebarStructure.map(item => (
+              <SidebarItemComponent key={item.slug} item={item} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -96,10 +102,10 @@ export function SidebarItemComponent({ item, path = '', depth = 0 }: {
   // Collection (top-level) items
   if (depth === 0) {
     return (
-      <li className="flex flex-col">
+      <div className="flex flex-col">
         <CollectionHeader icon={item.icon} title={item.title} />
         {item.children && (
-          <ul className="flex flex-col gap-y-0.5">
+          <div className="flex flex-col gap-y-0.5">
             {item.children.map(child => (
               <SidebarItemComponent
                 key={child.slug}
@@ -108,9 +114,9 @@ export function SidebarItemComponent({ item, path = '', depth = 0 }: {
                 depth={depth + 1}
               />
             ))}
-          </ul>
+          </div>
         )}
-      </li>
+      </div>
     );
   }
 
@@ -126,7 +132,7 @@ export function SidebarItemComponent({ item, path = '', depth = 0 }: {
   // Items with children
   if (item.children) {
     return (
-      <li className="flex flex-col">
+      <div className="flex flex-col">
         <Link to={`/${fullPath}`} className={cn(baseItemClasses, "flex justify-between")}>
           <div className="flex items-center gap-2">
             <ItemIcon icon={item.icon} isActive={isActive} />
@@ -147,7 +153,7 @@ export function SidebarItemComponent({ item, path = '', depth = 0 }: {
           isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         )}>
           <div className="overflow-hidden">
-            <ul className="flex flex-col gap-y-0.5 ms-5 my-2">
+            <div className="flex flex-col gap-y-0.5 ms-5 my-2">
               {item.children.map(child => (
                 <SidebarItemComponent
                   key={child.slug}
@@ -156,20 +162,20 @@ export function SidebarItemComponent({ item, path = '', depth = 0 }: {
                   depth={depth + 1}
                 />
               ))}
-            </ul>
+            </div>
           </div>
         </div>
-      </li>
+      </div>
     );
   }
 
   // Leaf nodes (no children)
   return (
-    <li>
+    <div>
       <Link to={`/${fullPath}`} className={baseItemClasses}>
         <ItemIcon icon={item.icon} isActive={isActive} />
         <span>{item.title}</span>
       </Link>
-    </li>
+    </div>
   );
 }

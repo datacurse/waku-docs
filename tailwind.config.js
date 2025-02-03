@@ -30,8 +30,15 @@ export default {
         code: {
           bg: '#f2f2f2',
           border: '#eaeaea'
+        },
+        scrollbar: {
+          thumb: '#d4d4d4',
+          track: '#f6f6f6'
         }
       }
     }
-  }
+  },
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true, preferredStrategy: 'pseudoelements' }),
+  ]
 };
